@@ -4,14 +4,14 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://your-vercel-domain.vercel.app"
+}));
 app.use(express.json());
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Load from .env
 });
-
-console.log("OPENAI = ", process.env.OPENAI_API_KEY);
 
 
 app.post("/chat", async (req, res) => {
