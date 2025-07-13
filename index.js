@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const app = express();
 app.use(cors({
-  origin: "https://your-vercel-domain.vercel.app"
+  origin: "https://chatbot-ui-three-silk.vercel.app"
 }));
 app.use(express.json());
 
