@@ -5,7 +5,10 @@ require("dotenv").config();
 
 const app = express();
 app.use(cors({
-  origin: "https://chatbot-ui-three-silk.vercel.app"
+  origin: [
+    "https://chatbot-ui-three-silk.vercel.app",
+    "https://chatbot-dyespor0y-sids-projects-7d9a71e4.vercel.app"
+  ]
 }));
 app.use(express.json());
 
