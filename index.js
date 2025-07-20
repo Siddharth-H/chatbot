@@ -6,14 +6,13 @@ require("dotenv").config();
 const app = express();
 app.use(cors({
   origin: [
-    "https://chatbot-ui-three-silk.vercel.app",
-    "https://chatbot-dyespor0y-sids-projects-7d9a71e4.vercel.app"
+    process.env.ALLOWED_URLS
   ]
 }));
 app.use(express.json());
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // Load from .env
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 
@@ -22,11 +21,10 @@ app.post("/chat", async (req, res) => {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // or whatever model you’re using
+      model: "gpt-3.5-turbo", 
       messages: [{ role: "user", content: message }],
     });
 
-    // SAFELY check if choices exist
     if (completion && completion.choices && completion.choices.length > 0) {
       res.json({ reply: completion.choices[0].message.content });
     } else {
