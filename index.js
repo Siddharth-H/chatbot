@@ -4,10 +4,10 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
+
 app.use(cors({
-  origin: [
-    process.env.ALLOWED_URLS
-  ]
+  origin: allowedOrigins
 }));
 app.use(express.json());
 
@@ -36,5 +36,9 @@ app.post("/chat", async (req, res) => {
   }
 });
 
+// Root page
+app.get("/", (req, res) => {
+  res.send("<h2>✅ AI Chatbot Server is Running</h2>");
+});
 
 app.listen(3001, () => console.log("Server running on port 3001"));
